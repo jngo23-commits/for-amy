@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Note for Amy</title>
+    <style>
+        body { 
+            font-family: 'Georgia', serif; 
+            background-color: #f0f4f8; 
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; margin: 0; text-align: center; overflow-x: hidden;
+        }
+        .container { 
+            max-width: 500px; width: 90%; padding: 40px; 
+            background: white; border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            border: 3px solid #9dbad5;
+            position: relative;
+        }
+        .hidden { display: none; }
+        
+        .envelope {
+            border: 3px dashed #b19cd9;
+            padding: 60px 20px;
+            background: #fafaff;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .envelope:hover { transform: scale(1.05); }
+        .flower-icon { font-size: 50px; margin-bottom: 15px; }
+        
+        button { 
+            background-color: #9dbad5; color: white; border: none; 
+            padding: 15px 30px; border-radius: 30px; cursor: pointer; 
+            font-size: 18px; margin-top: 20px; font-weight: bold;
+        }
+        video { width: 100%; border-radius: 10px; margin-top: 10px; }
+        ul { text-align: left; line-height: 2; display: inline-block; font-size: 18px; }
+        #maybeBtn { position: relative; transition: 0.1s; }
+    </style>
+</head>
+<body>
+
+    <div id="part1" class="container envelope" onclick="nextPart(1)">
+        <div class="flower-icon">💠🌸💠</div>
+        <h1 style="color: #5a7d9a; margin: 0;">To: Amy</h1>
+        <p style="color: #888; margin-top: 20px;">(Tap the envelope to open)</p>
+    </div>
+
+    <div id="part2" class="container hidden">
+        <h3 style="color: #5a7d9a;">A message from Hank...</h3>
+        <video id="kothVideo" controls>
+            <source src="romanticintent.mp4" type="video/mp4">
+        </video>
+        <br>
+        <button onclick="nextPart(2)">Continue ❤️</button>
+    </div>
+
+    <div id="part3" class="container hidden">
+        <h2 style="color: #b19cd9;">See you Friday!</h2>
+        <p>Dear Amy, I’m excited to see you! I can’t wait to swap more stories, share more laughs and cuddle all night long.</p>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+        <ul>
+            <li>🌮 Dinner at <strong>Mama Cucas</strong></li>
+            <li>⛳️ <strong>Choice:</strong> Putt Putt OR <i>Ratatouille</i></li>
+            <li>🃏 <strong>Games:</strong> 13, Flip Seven, or Monopoly Deal</li>
+            <li>💆‍♂️ Massage & Cuddles</li>
+            <li>🥟 Dim Sum Breakfast</li>
+        </ul>
+        <p style="font-size: 14px; color: #777;">I'll let you go by noon Saturday for errands, unless you want to stay longer!</p>
+        <button onclick="nextPart(3)">Next</button>
+    </div>
+
+    <div id="part4" class="container hidden">
+        <h2>What do you think?</h2>
+        <button onclick="showExcited()">I’m excited to see you!</button>
+        <br>
+        <button id="maybeBtn" onmouseover="moveMaybe()" onclick="moveMaybe()">Maybe?</button>
+    </div>
+
+    <div id="finalExcited" class="container hidden">
+        <div style="font-size: 60px;">😊🥰✨❤️🤩</div>
+        <h2 style="color: #5a7d9a;">I can't wait! See you Friday.</h2>
+        <div style="font-size: 40px;">💠🌸💠</div>
+    </div>
+
+    <script>
+        function nextPart(current) {
+            document.getElementById('part' + current).classList.add('hidden');
+            document.getElementById('part' + (current + 1)).classList.remove('hidden');
+            if(current === 1) {
+                const vid = document.getElementById('kothVideo');
+                vid.play();
+            }
+        }
+
+        function showExcited() {
+            document.getElementById('part4').classList.add('hidden');
+            document.getElementById('finalExcited').classList.remove('hidden');
+        }
+
+        function moveMaybe() {
+            const btn = document.getElementById('maybeBtn');
+            const x = Math.random() * (window.innerWidth - btn.clientWidth - 50);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight - 50);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.innerText = "Are you sure? 😉";
+        }
+    </script>
+</body>
+</html>
